@@ -1,6 +1,4 @@
 #labels screenshots
-#Screenshots
-
 = Screenshots =
 
 <img src="http://mytvondemand.googlecode.com/files/episode.jpg" width="500px" /><br /><br /><br />
