@@ -31,12 +31,12 @@
 ?>
 				<div class="seriesdetails subscriptions">
 					<div class="imagecontainer">
-						<a href="/show.php?showid=<?=$singleshow['id']?>"><img class="thumbnail" alt="<?=utf8_decode($singleshow['title'])?>" src="/cache/<?=$singleshow['id']?>-poster.jpg" /></a>
+						<a href="show.php?showid=<?=$singleshow['id']?>"><img class="thumbnail" alt="<?=utf8_decode($singleshow['title'])?>" src="cache/<?=$singleshow['id']?>-poster.jpg" /></a>
 						<div class="quality">Quality: <strong><?=$quality?></strong></div>
 						<div class="nextair">Next airing: <strong><?=$airingtext?></strong></div>
 					</div>
 					<?=addSubscribeText(1, $singleshow['id'])?>
-					<h2><a href="/show.php?showid=<?=$singleshow['id']?>"><?=utf8_decode($singleshow['title'])?></a></h2>
+					<h2><a href="show.php?showid=<?=$singleshow['id']?>"><?=utf8_decode($singleshow['title'])?></a></h2>
 					<div class="plot"><?=utf8_decode($singleshow['plot'])?></div>
 					
 				</div>

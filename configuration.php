@@ -28,7 +28,7 @@
 	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
 						<div class="contentbox normalbox configuration">
-							<form action="/configuration.php?ajax=1" method="post">
+							<form action="configuration.php?ajax=1" method="post">
 								<h3>Language Configuration</h3>
 								<ul class="configuration">
 									<li>

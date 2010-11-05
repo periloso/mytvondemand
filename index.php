@@ -10,10 +10,10 @@
 				<div class="seriesdetails">
 					<?php if ($randomshows->showsRemaining()>0) { ?>
 					<div class="imagecontainer">
-						<a href="/show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="/cache/<?=$randomshows->getID()?>-poster.jpg" /></a>
+						<a href="show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="cache/<?=$randomshows->getID()?>-poster.jpg" /></a>
 					</div>
 					<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
-					<h2><a href="/show.php?showid=<?=$randomshows->getID()?>"><?=$randomshows->getTitle()?></a></h2>
+					<h2><a href="show.php?showid=<?=$randomshows->getID()?>"><?=$randomshows->getTitle()?></a></h2>
 					<div class="plot"><?=$randomshows->getPlot()?></div>
 					<?php } ?>
 				</div>
@@ -21,7 +21,7 @@
 					<?php if ($randomshows->showsRemaining()>0) { ?><?php $randomshows->nextShow(); ?>
 					<div class="contentbox photobox">
 						<div class="imagecontainer">
-							<a href="/show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="/cache/<?=$randomshows->getID()?>-fanart.jpg" /></a>
+							<a href="show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="cache/<?=$randomshows->getID()?>-fanart.jpg" /></a>
 						</div>
 						<div class="details">
 							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
@@ -34,7 +34,7 @@
 					<?php if ($randomshows->showsRemaining()>0) { ?><?php $randomshows->nextShow(); ?>
 					<div class="contentbox photobox">
 						<div class="imagecontainer">
-							<a href="/show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="/cache/<?=$randomshows->getID()?>-fanart.jpg" /></a>
+							<a href="show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="cache/<?=$randomshows->getID()?>-fanart.jpg" /></a>
 						</div>
 						<div class="details">
 							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
