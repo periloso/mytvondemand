@@ -683,7 +683,7 @@
 			} else print "Unable to contact TheTVDB.com";
 		}
 		
-		public function updateShow($force = 0, $downloadNew = 0) {
+		public function updateShow($force = 0) {
 			if ($this->thetvdbid == 0) {
 				$showarray = $this->searchTheTVDBID();
 				$this->extractShow();
@@ -699,7 +699,7 @@
 						$torrentQuality = $listTorrents[$arraykey]['quality'];
 						$hash = '';
 						if ($this->myEpisodes[$arraykey]) {
-							if (($this->quality == $torrentQuality) && (count($this->myEpisodes[$arraykey]->getTorrents($this->quality))==0))
+							if (($this->quality == $torrentQuality) && (count($this->myEpisodes[$arraykey]->getTorrents($this->quality))==0) && ($this->subscribed == 1))
 								$hash = $this->transmission->addTorrent($torrentLink);
 							if (isset($this->myEpisodes[$arraykey]))
 								$this->myEpisodes[$arraykey]->updateTorrents($torrentQuality, $torrentLink, $hash);
@@ -883,7 +883,8 @@
 						}
 					}
 				}
-				$this->updateShow();
+				if (($checkEpisodes == 1) || ($this->subscribed == 1)) // If we are looking for the episode list or it is subscribed, try to update it
+					$this->updateShow();
 			}
 		}
 	}
