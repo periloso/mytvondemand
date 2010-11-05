@@ -8,14 +8,26 @@ apt-get install python-mysqldb php5-mysql php5-cli apache2 mysql-server python-x
 
 
 Then copy all this directory to the apache public directory.
-Configure MySQL and add a new database (it is recommended to use its own user and pass).
+- Configure MySQL and add a new database (it is recommended to use its own
+  user and pass).
+  ex. root@vmdl-01:/var/www/# mysql
+      mysql> create database mytvod;
+      mysql> quit;
 
-Write the following in a shell to build required tables:
-mysql -u <username> -p <dbname> << mytvod.sql
+- Write the following in a shell to build required tables:
+  mysql -u <username> -p <dbname> < mytvod.sql
+  ex. mysql -u root < mytvod.sql   # root user, without any password
+  ex. mysql -u root -p < mytvod.sql # root user with a password (asked later)
+
+- Need to edit the config.php and update DB connections to your settings 
+  (username, password and database name)
+  ex. nano config.php
 
 Make sure temp/ and cache/ directories are writable by the web server
 
-- On Debian/Ubuntu you can write `chown www-data:www-data -R . && chmod 775 -R cache/ temp/`
-- On Centos-like you can write `chown apache:apache -R . && chmod 775 -R cache/ temp/`
+- On Debian/Ubuntu you can write 
+  chown www-data:www-data -R . && chmod 775 -R cache/ temp/
+- On Centos-like you can write 
+  chown apache:apache -R . && chmod 775 -R cache/ temp/
 
 Connect to your server's IP.

@@ -1,15 +1,15 @@
 jQuery.fn.exists = function(){return jQuery(this).length>0;}
 $(document).ready(function () {
 	$('.manualaddtorrent').live('click', function () {
-		var url = $(this).parent().parent().children('a').attr('href').replace('/episode.php?','/addmanualtorrent.php?');
+		var url = $(this).parent().parent().children('a').attr('href').replace('episode.php?','addmanualtorrent.php?');
 		var myParent = $(this).parent().parent();
 		myParent.children('span').children('.manualaddtorrent').animate({ width: '0', opacity: 'toggle' });
-		myParent.append('<div class="manuallink"><form name="manuallinkform" method="post" action="/addtorrent.php?' + url + '"><label>Manual torrent link: </label><input type="text" name="torrenturl" /><input type="submit"></form></div>');
+		myParent.append('<div class="manuallink"><form name="manuallinkform" method="post" action="addtorrent.php?' + url + '"><label>Manual torrent link: </label><input type="text" name="torrenturl" /><input type="submit"></form></div>');
 		myParent.children('.manuallink').hide().slideDown();
 		myParent.children('.manuallink').children('form').submit(function () {
 			$(this).slideUp();
 			var thisdownload = myParent.children('span').children('span.manualaddtorrent');
-			thisdownload.html('<img style="width: 18px;" src="/images/loading.gif" title="Loading..." />');
+			thisdownload.html('<img style="width: 18px;" src="images/loading.gif" title="Loading..." />');
 			thisdownload.animate( { width: '18px', opacity: 'toggle' });
 			thisdownload.attr('class', 'loading');
 			var data = $(this).serialize();
@@ -20,10 +20,10 @@ $(document).ready(function () {
 				success: function(data) {
 					thisdownload.animate({ width: '0', opacity: 'toggle' }, function () {
 						if (data == 'ok') {
-							thisdownload.html('<img style="width: 18px;" src="/images/download.png" title="Download" />');
+							thisdownload.html('<img style="width: 18px;" src="images/download.png" title="Download" />');
 							thisdownload.attr('class', 'downloadtorrent');
 						} else {
-							thisdownload.html('<img style="width: 18px;" src="/images/manual_torrent.png" title="Manual Torrent" alt="Manual Torrent" />');
+							thisdownload.html('<img style="width: 18px;" src="images/manual_torrent.png" title="Manual Torrent" alt="Manual Torrent" />');
 							thisdownload.attr('class', 'manualaddtorrent');
 						}
 					}).animate({ width: '18px', opacity: 'toggle'});
@@ -33,10 +33,10 @@ $(document).ready(function () {
 		});
 	});
 	$('.downloadtorrent').live('click', function () {
-		var url = $(this).parent().parent().children('a').attr('href').replace('/episode.php?', '/downloadtorrent.php?');
+		var url = $(this).parent().parent().children('a').attr('href').replace('episode.php?', 'downloadtorrent.php?');
 		var thisdownload = $(this);
 		$(this).animate({ width: '0', opacity: 'toggle' }, function () {
-			$(this).html('<img style="width: 18px;" src="/images/loading.gif" title="Loading..." />');
+			$(this).html('<img style="width: 18px;" src="images/loading.gif" title="Loading..." />');
 		}).animate({ width: '18px', opacity: 'toggle'});
 		$(this).attr('class', 'loading');
 		$.get(url, function(data) {
@@ -50,24 +50,24 @@ $(document).ready(function () {
 				var icontext = 'Error. Try again.';
 			}
 			thisdownload.animate({ width: '0', opacity: 'toggle' }, function () {
-				thisdownload.html('<img src="/images/' + icon + '.png" title="' + icontext + '" />');
+				thisdownload.html('<img src="images/' + icon + '.png" title="' + icontext + '" />');
 			}).animate({ width: '18px', opacity: 'toggle'});
 		});
 	});
 	$('.downloadingtorrent').live('click', function () {
-		var url = $(this).parent().parent().children('a').attr('href').replace('/episode.php?', '/downloadtorrent.php?') + '&pause=1';
+		var url = $(this).parent().parent().children('a').attr('href').replace('episode.php?', 'downloadtorrent.php?') + '&pause=1';
 		$.get(url);
 		$(this).animate({ width: '0', opacity: 'toggle' }, function () {
 			$(this).attr('class', 'pausedtorrent');
-			$(this).html('<img src="/images/paused.png" title="Paused" />');
+			$(this).html('<img src="images/paused.png" title="Paused" />');
 		}).animate({ width: '18px', opacity: 'toggle'});
 	});
 	$('.pausedtorrent').live('click', function() {
-		var url = $(this).parent().parent().children('a').attr('href').replace('/episode.php?', '/downloadtorrent.php?') + '&resume=1';
+		var url = $(this).parent().parent().children('a').attr('href').replace('episode.php?', 'downloadtorrent.php?') + '&resume=1';
 		$.get(url);
 		$(this).animate({ width: '0', opacity: 'toggle' }, function () {
 			$(this).attr('class', 'downloadingtorrent');
-			$(this).html('<img src="/images/downloading.png" title="Downloading..." />');
+			$(this).html('<img src="images/downloading.png" title="Downloading..." />');
 		}).animate({ width: '18px', opacity: 'toggle'});
 	})
 	$('.subscribe').live('click', function () {
@@ -137,7 +137,7 @@ $(document).ready(function () {
 				$('.configuration').remove();
 			});
 		} else {
-			$.get('/configuration.php?ajax=1', function(data) {
+			$.get('configuration.php?ajax=1', function(data) {
 				$('.content').prepend(data);
 				$('.configuration').toggle().slideDown();
 				$('.configuration').children('form').submit(function () {
@@ -176,7 +176,7 @@ $(document).ready(function () {
 		buttons: {
 			'Subscribe': function() {
 				var text = $(this).children('select').children('option:selected').attr('id');
-				actionTorrent(text.replace('/episode.php?', '/subscribe.php?from=1&'));
+				actionTorrent(text.replace('episode.php?', 'subscribe.php?from=1&'));
 				$(this).children('select').html('');
 				$(this).dialog('close');
 			},
@@ -189,7 +189,7 @@ $(document).ready(function () {
 			'Subscribe': function() {
 				var url = $(this).children('select#episode').children('option:selected').attr('id');
 				var quality = $(this).children('select#quality').children('option:selected').attr('id');
-				$.get(url.replace('/episode.php?', '/subscribe.php?from=1&') + '&quality=' + quality);
+				$.get(url.replace('episode.php?', 'subscribe.php?from=1&') + '&quality=' + quality);
 				$(this).children('select').html('').delay(3000);
 				window.location = url;
 			},
@@ -197,9 +197,9 @@ $(document).ready(function () {
 				var url = $(this).children('select#episode').children('option:selected').attr('id');
 				var quality = $(this).children('select#quality').children('option:selected').attr('id');
 				var language = $(this).children('select#language').children('option:selected').attr('id');
-				$.get(url.replace('/episode.php?', '/subscribe.php?') + '&quality=' + quality + '&language=' + language);
+				$.get(url.replace('episode.php?', 'subscribe.php?') + '&quality=' + quality + '&language=' + language);
 				$('.subscribedialog').html('<span>Unsubscribe</span>');
-				$('.subscribedialog').attr('href', url.replace('/episode.php?', '/subscribe.php?') + '&cancel=1');
+				$('.subscribedialog').attr('href', url.replace('episode.php?', 'subscribe.php?') + '&cancel=1');
 				$('.subscribedialog').attr('class','subscribe');
 				$(this).dialog('close');
 			},
@@ -226,7 +226,7 @@ $(document).ready(function () {
 	$('.progressbar').progressbar();
 	
 	$('.thumb').mouseenter(function () {
-		$(this).prepend('<div class="hiddenmenu"><img src="/images/resume.png" /><img src="/images/pause.png" /><img src="/images/remove.png" /></div>');
+		$(this).prepend('<div class="hiddenmenu"><img src="images/resume.png" /><img src="images/pause.png" /><img src="images/remove.png" /></div>');
 		$(this).children('.hiddenmenu').animate({bottom: '0'}, {queue: false});
 	});
 	$('.thumb').mouseleave(function () {
@@ -235,7 +235,7 @@ $(document).ready(function () {
 		}});
 	});
 	$('.hiddenmenu img').live('click', function () {
-		var url = $(this).parent().parent().parent().parent().children('h2').children('a:nth-child(2)').attr('href').replace('/episode.php?', '/downloadtorrent.php?');
+		var url = $(this).parent().parent().parent().parent().children('h2').children('a:nth-child(2)').attr('href').replace('episode.php?', 'downloadtorrent.php?');
 		var imgsrc = $(this).attr('src');
 		if (imgsrc.indexOf('resume')>0)
 			var command = '&resume=1';
@@ -249,7 +249,7 @@ $(document).ready(function () {
 	if ($('.beingdownloaded .downloaddetails .imagecontainer .progressbar').exists()) {
 		window.setInterval(function () {
 			$('.beingdownloaded .downloaddetails').each(function () {
-				var link = $(this).children('h2').children('a:nth-child(2)').attr('href').replace('/episode.php?','/downloadstatus.php?');
+				var link = $(this).children('h2').children('a:nth-child(2)').attr('href').replace('episode.php?','downloadstatus.php?');
 				var progressepisode = $(this).children('.imagecontainer').children('.progressbar');
 				var episodedetails = $(this).children('.imagecontainer').children('.details');
 				var thisdownload = $(this);
@@ -295,7 +295,7 @@ $(document).ready(function () {
 	$('.imagecontainer a').live('click', function () {
 		var imagelink = $(this).children('img.thumbnail').attr('src');
 		var height = $('body').height();
-		$('body').append('<div id="lightbox"></div><div id="lightbox-panel"><img src="/images/ajaxLoader.gif" /></div>');
+		$('body').append('<div id="lightbox"></div><div id="lightbox-panel"><img src="images/ajaxLoader.gif" /></div>');
 		$('#lightbox').css({opacity: '0', background: '#000', top: '0', left: '0', position: 'absolute', width: '100%', height: height+91, 'z-index': '1000'});
 		$('#lightbox-panel').css({'max-width': '800px', 'max-height': '700px', opacity: '0', position: 'fixed', top: '30px', background: '#FFF', left: '50%', 'margin-left': '0', width: 'auto', padding: '10px', border: '2px solid #CCCCCC', 'z-index': '1001'});
 		$('#lightbox-panel img').css({'max-width': '800px', 'max-height': '700px'});
