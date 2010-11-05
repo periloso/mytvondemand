@@ -122,10 +122,7 @@
 	function getString($dbkey) {
 		$q = mysql_query("SELECT value1 FROM configuration WHERE configuration.key = '$dbkey'");
 		if (mysql_num_rows($q) > 0)
-			if ($dbkey == 'transmissionurl')
-				return str_replace('/transmission/rpc/', '', mysql_result($q, 0));
-			else
-				return mysql_result($q, 0);
+			return mysql_result($q, 0);
 		elseif ($dbkey == 'thetvdblanguage')
 			return 'en';
 		elseif ($dbkey == 'serieslocation')

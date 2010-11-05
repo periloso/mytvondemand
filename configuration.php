@@ -22,7 +22,7 @@
 		$subtitlescript = getString('subtitlescript');
 		$torrentquality = getInteger('torrentquality');
 		$serieslocation = getString('serieslocation');
-		$transmissionurl = getString('transmissionurl');
+		$transmissionurl = str_replace('/transmission/rpc/', '', getString('transmissionurl'));
 		$transmissionusername = getString('transmissionusername');
 	}
 	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
