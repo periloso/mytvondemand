@@ -70,3 +70,5 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   `quality` tinyint(4) NOT NULL,
   UNIQUE KEY `showid` (`showid`,`season`,`episode`,`quality`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `configuration` (`key`, `value1`, `value2`, `value3`) VALUES ('transmissionurl', 'http://localhost:9091/transmission/rpc/', 0, '0000-00-00')

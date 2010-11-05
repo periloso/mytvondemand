@@ -106,7 +106,7 @@
 									</li>
 									<li>
 										<label>Save Settings:</label>
-										<input type="submit" />
+										<input type="submit" value="Save" />
 									</li>
 								</ul>
 							</form>
