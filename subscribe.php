@@ -23,7 +23,7 @@
 			mysql_query("DELETE FROM subscriptions WHERE showid = '$showid'");
 	} else {
 		if ($cancel == 0) {
-			print ("INSERT INTO subscriptions (showid, quality, subtitles) VALUES ('$showid', '$quality', '$sublanguage')");
+			echo "INSERT INTO subscriptions (showid, quality, subtitles) VALUES ('$showid', '$quality', '$sublanguage')";
 			mysql_query("INSERT INTO subscriptions (showid, quality, subtitles) VALUES ('$showid', '$quality', '$sublanguage')");
 			if ($from == 1) {
 				$q = mysql_query("SELECT * FROM torrents WHERE quality = '$quality' AND showid = '$showid' AND ((season = $season AND episode >= $id) OR (season > $season)) ORDER BY season, episode");
@@ -34,5 +34,5 @@
 			}
 		}
 	}
-	echo "subscriptions (showid) VALUES ('$showid')";
+	echo "<br />\nsubscriptions (showid) VALUES ('$showid')";
 ?>
