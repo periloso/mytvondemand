@@ -1,7 +1,7 @@
 First, install the required packages:
 
 - On Debian, write the following to a console:
-apt-get install python-mysqldb php5-mysql php5-cli apache2 mysql-server python-xml
+apt-get install python-mysqldb php5-gd php5-mysql php5-cli apache2 mysql-server python-xml
 
 - On Ubuntu it should be the same, but it hasn't been tested yet.
 - On other Linux distributions, look for those packages in your package manager.
@@ -29,5 +29,12 @@ Make sure temp/ and cache/ directories are writable by the web server
   chown www-data:www-data -R . && chmod 775 -R cache/ temp/
 - On Centos-like you can write 
   chown apache:apache -R . && chmod 775 -R cache/ temp/
+
+Add the following lines to /etc/crontab (edit the path!):
+
+# Check for new subtitles every 30 minutes
+*/30 *  * * *   transmission    /var/www/mytvod/subtitles.php
+# Check for new torrents twice a day, at 09:38 and 21:38
+38 9,21 * * *   root            /var/www/mytvod/updatesubscriptions.php
 
 Connect to your server's IP.
