@@ -210,7 +210,7 @@ $(document).ready(function () {
 			$(this).children().each(function () {
 				$(this).children('ul').each(function () {
 					$(this).children('li').each(function () {
-						if ($(this).children('span').children('img').attr('alt') != 'Future episode') {
+						if ($(this).children('span').children('img').attr('src') != 'images/future_episode.png') {
 							var seasoncontainer = $(this).children('a').attr('href');
 							var re = new RegExp('season=([0-9]*)\&');
 							season = re.exec(seasoncontainer)[1];

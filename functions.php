@@ -60,12 +60,12 @@
 
 	function addSubscribeText($isSubscribed, $showid, $dialog = 0) {
 		if ($isSubscribed)
-			echo "<a href='/subscribe.php?showid=$showid&amp;cancel=1' class='subscribe'><span>Unsubscribe</span></a>";
+			echo "<a href='subscribe.php?showid=$showid&amp;cancel=1' class='subscribe'><span>Unsubscribe</span></a>";
 		else {
 			if ($dialog) {
-				echo "<a href='/subscribe.php?showid=$showid' class='subscribedialog'><span>Subscribe</span></a>";
+				echo "<a href='subscribe.php?showid=$showid' class='subscribedialog'><span>Subscribe</span></a>";
 			} else {
-				echo "<a href='/subscribe.php?showid=$showid' class='subscribe'><span>Subscribe</span></a>";
+				echo "<a href='subscribe.php?showid=$showid' class='subscribe'><span>Subscribe</span></a>";
 			}
 		}
 	}
@@ -168,29 +168,29 @@
 	function setStatus($episode) {
 		switch ($episode->getStatus()) {
 			case EP_NOT_PRESENT:
-				echo '<span class="downloadtorrent"><img alt="Download" title="Download" src="/images/download.png" /></span>';
+				echo '<span class="downloadtorrent"><img alt="Download" title="Download" src="images/download.png" /></span>';
 				break;
 			case EP_DOWNLOADING:
-				echo '<span class="downloadingtorrent"><img alt="Downloading..." title="Downloading..." src="/images/downloading.png" /></span>';
+				echo '<span class="downloadingtorrent"><img alt="Downloading..." title="Downloading..." src="images/downloading.png" /></span>';
 				break;
 			case EP_PENDING:
-				echo '<img alt="Already downloaded" title="Already downloaded" src="/images/tick.png" />';
+				echo '<img alt="Already downloaded" title="Already downloaded" src="images/tick.png" />';
 				break;
 			case EP_ON_HARDDISK:
-				echo '<img alt="Already downloaded" title="Already downloaded" src="/images/tick.png" />';
+				echo '<img alt="Already downloaded" title="Already downloaded" src="images/tick.png" />';
 				break;
 			case EP_DOWNLOAD_STOP:
-				echo '<span class="pausedtorrent"><img alt="Paused" title="Paused" src="/images/paused.png" /></span>';
+				echo '<span class="pausedtorrent"><img alt="Paused" title="Paused" src="images/paused.png" /></span>';
 				break;
 			case EP_FUTURE_EPISODE:
 				$airing = ($episode->getUntilAired() == 0) ? 'Today' : (($episode->getUntilAired() == 1) ? 'Tomorrow' : $episode->getUntilAired() . ' days');
-				echo '<span class="manualaddtorrent"><img alt="Future episode" title="Future episode - Airing: '.$airing.'" src="/images/future_episode.png" /></span>';
+				echo '<span class="manualaddtorrent"><img alt="Future episode" title="Future episode - Airing: '.$airing.'" src="images/future_episode.png" /></span>';
 				break;
 			case EP_NEED_MANUAL_TORRENT:
-				echo '<span class="manualaddtorrent"><img alt="Manual Torrent" title="Manual Torrent" src="/images/manual_torrent.png" /></span>';
+				echo '<span class="manualaddtorrent"><img alt="Manual Torrent" title="Manual Torrent" src="images/manual_torrent.png" /></span>';
 				break;
 			case EP_UNKNOWN_AIRING:
-				echo '<span class="manualaddtorrent"><img alt="Airing Unknown" title="Airing Unknown" src="/images/unknown_airing.png" /></span>';
+				echo '<span class="manualaddtorrent"><img alt="Airing Unknown" title="Airing Unknown" src="images/unknown_airing.png" /></span>';
 				break;
 		}
 	}
