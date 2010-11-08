@@ -14,7 +14,7 @@
 						</div>
 						<div class="details">
 							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
-							<h3><?=$randomshows->getTitle()?></h3>
+							<h3><a href="show.php?showid=<?=$randomshows->getID()?>"><?=$randomshows->getTitle()?></a></h3>
 							<span><?=cutText($randomshows->getPlot(), 220)?></span>
 						</div>
 					</div><?php } ?>
@@ -35,7 +35,7 @@
 						</div>
 						<div class="details">
 							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
-							<h3><?=$randomshows->getTitle()?></h3>
+							<h3><a href="show.php?showid=<?=$randomshows->getID()?>"><?=$randomshows->getTitle()?></a></h3>
 							<span><?=cutText($randomshows->getPlot(), 220)?></span>
 						</div>
 					</div><?php } ?>
