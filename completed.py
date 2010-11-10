@@ -6,6 +6,7 @@ from easytvdb import EasyTVDB
 from xbmchelper import XBMCHelper
 
 def parseConfigPHP():
+	global myPath
 	config = open(myPath + '/config.php', 'r').read().splitlines()
 	keys = {}
 	for line in config:
@@ -20,7 +21,7 @@ def parseConfigPHP():
 	return keys
 
 def processTorrent(torrentName, torrentDir, torrentHash):
-	global config, db, XHelper, easytv
+	global config, db, XHelper, easytv, myPath
 	cursor = db.cursor(MySQLdb.cursors.DictCursor)
 	if not os.path.exists(torrentDir + "/" + torrentName):
 		syslog.syslog("Torrent doesn't exists! (" + torrentDir + "/" + torrentName + ") " + torrentHash)
