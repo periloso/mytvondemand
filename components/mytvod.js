@@ -189,19 +189,20 @@ $(document).ready(function () {
 			'Subscribe': function() {
 				var url = $(this).children('select#episode').children('option:selected').attr('id');
 				var quality = $(this).children('select#quality').children('option:selected').attr('id');
-				$.get(url.replace('episode.php?', 'subscribe.php?from=1&') + '&quality=' + quality);
-				$(this).children('select').html('').delay(3000);
-				window.location = url;
+				$.get(url.replace('episode.php?', 'subscribe.php?from=1&') + '&quality=' + quality, function (data) {
+					window.location = url;
+				});
 			},
 			'Next one': function () { 
 				var url = $(this).children('select#episode').children('option:selected').attr('id');
 				var quality = $(this).children('select#quality').children('option:selected').attr('id');
 				var language = $(this).children('select#language').children('option:selected').attr('id');
-				$.get(url.replace('episode.php?', 'subscribe.php?') + '&quality=' + quality + '&language=' + language);
-				$('.subscribedialog').html('<span>Unsubscribe</span>');
-				$('.subscribedialog').attr('href', url.replace('episode.php?', 'subscribe.php?') + '&cancel=1');
-				$('.subscribedialog').attr('class','subscribe');
-				$(this).dialog('close');
+				$.get(url.replace('episode.php?', 'subscribe.php?') + '&quality=' + quality + '&language=' + language, function (data) {
+					$('.subscribedialog').html('<span>Unsubscribe</span>');
+					$('.subscribedialog').attr('href', url.replace('episode.php?', 'subscribe.php?') + '&cancel=1');
+					$('.subscribedialog').attr('class','subscribe');
+					$(this).dialog('close');
+				});
 			},
 			'Cancel': function () { $(this).dialog('close'); }
 		});
@@ -211,7 +212,8 @@ $(document).ready(function () {
 				$(this).children('ul').each(function () {
 					$(this).children('li').each(function () {
 						episodeIcon = $(this).children('span').children('span').children('img').attr('src');
-						if ((episodeIcon != 'images/future_episode.png') && (episodeIcon != 'images/unknown_airing.png')) {
+						//if ((episodeIcon != 'images/future_episode.png') && (episodeIcon != 'images/unknown_airing.png')) {
+						if (episodeIcon == 'images/download.png') {
 							var seasoncontainer = $(this).children('a').attr('href');
 							var re = new RegExp('season=([0-9]*)\&');
 							season = re.exec(seasoncontainer)[1];
