@@ -923,7 +923,7 @@
 					$presentTorrents[$i] = $torrent->hashString;
 					$i++;
 				}
-				mysql_query("UPDATE torrents SET hash = '' WHERE hash NOT IT ('" . implode("', '", $presentTorrents) . "')");
+				mysql_query("UPDATE torrents SET hash = '' WHERE hash NOT IN ('" . implode("', '", $presentTorrents) . "')");
 			}
 		}
 		
