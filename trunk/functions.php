@@ -910,7 +910,8 @@
 					$completed = ($torrent->sizeWhenDone - $torrent->leftUntilDone) + 1;
 					if ($size == 0) {
 						$percentage = 0;
-						$status = 32;
+						if ($torrent->status == 16) $status = $torrent->status;
+						else $status = 32;
 					} else {
 						$status = $torrent->status;
 						if (($completed > 0) && ($size > 0))

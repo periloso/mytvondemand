@@ -27,7 +27,7 @@
 								foreach ($seasonSplit[0] as $season) { if (!isset($season[0])) break; // PHP BUG?!?!
 							?>
 							<div class="contentbox normalbox seasons">
-								<h3>Season <?php printf("%02d", $season[0]->getSeason())?> <a href="subscribe.php?<?=$season[0]->getShowID()?>" class="subscribe dldmissingeps"><span>Download missing episodes</span></a></h3>
+								<h3>Season <?php printf("%02d", $season[0]->getSeason())?> <a href="show.php?showid=<?=$season[0]->getShowID()?>" class="subscribe dldmissingeps"><span>Download missing episodes</span></a></h3>
 								<ul>
 									<?php
 									foreach($season as $episode) { ?><li><a href="episode.php?showid=<?=$episode->getShowID()?>&amp;season=<?=$episode->getSeason()?>&amp;id=<?=$episode->getEpisodeID()?>"><span><?php printf("%02d", $episode->getEpisodeID())?> - <?=$episode->getTitle()?></span></a><span><?php setStatus($episode) ?></span></li>
@@ -41,7 +41,7 @@
 								foreach ($seasonSplit[1] as $season) { if (!isset($season[0])) break; // PHP BUG?!?!
 							?>
 							<div class="contentbox normalbox seasons">
-								<h3>Season <?php printf("%02d", $season[0]->getSeason())?> <a href="subscribe.php?<?=$season[0]->getShowID()?>" class="subscribe dldmissingeps"><span>Download missing episodes</span></a></h3>
+								<h3>Season <?php printf("%02d", $season[0]->getSeason())?> <a href="show.php?showid=<?=$season[0]->getShowID()?>" class="subscribe dldmissingeps"><span>Download missing episodes</span></a></h3>
 								<ul>
 									<?php
 									foreach($season as $episode) { ?><li><a href="episode.php?showid=<?=$episode->getShowID()?>&amp;season=<?=$episode->getSeason()?>&amp;id=<?=$episode->getEpisodeID()?>"><span><?php printf("%02d", $episode->getEpisodeID())?> - <?=$episode->getTitle()?></span></a><span><?php setStatus($episode) ?></span></li>

@@ -70,6 +70,34 @@ $(document).ready(function () {
 			$(this).html('<img src="images/downloading.png" title="Downloading..." />');
 		}).animate({ width: '18px', opacity: 'toggle'});
 	})
+	$('.dldmissingeps').live('click', function () {
+		$(this).parent().parent().children('ul').children('li').each(function () {
+			var thisepisode = $(this).children('span').children('.downloadtorrent');
+			if (thisepisode.exists()) {
+
+				var url = thisepisode.parent().parent().children('a').attr('href').replace('episode.php?', 'downloadtorrent.php?');
+				thisepisode.animate({ width: '0', opacity: 'toggle' }, function () {
+					$(this).html('<img style="width: 18px;" src="images/loading.gif" title="Loading..." />');
+				}).animate({ width: '18px', opacity: 'toggle'});
+				thisepisode.attr('class', 'loading');
+				$.get(url, function(data) {
+					if (data == 'ok') {
+						var icon = 'downloading';
+						thisepisode.attr('class', 'downloadingtorrent');
+						var icontext = 'Downloading...';
+					} else {
+						var icon = 'cross';
+						thisepisode.attr('class', 'downloadtorrent');
+						var icontext = 'Error. Try again.';
+					}
+					thisepisode.animate({ width: '0', opacity: 'toggle' }, function () {
+						thisepisode.html('<img src="images/' + icon + '.png" title="' + icontext + '" />');
+					}).animate({ width: '18px', opacity: 'toggle'});
+				});
+			}
+		});
+		return false;
+	});
 	$('.subscribe').live('click', function () {
 		var url = $(this).attr('href');
 		$(this).children('span').fadeOut('fast', function() {
