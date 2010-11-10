@@ -81,7 +81,7 @@
 										<select name="subtitlescript"><?=listSubtitleScripts()?></select>
 									</li>
 									<li>
-										<label>Minimum show quality:</label>
+										<label>Show quality:</label>
 										<select name="torrentquality">
 											<option value="0"<?php if ($torrentquality == 0) echo ' selected="selected"'?>>HDTV</option>
 											<option value="1"<?php if ($torrentquality == 1) echo ' selected="selected"'?>>DVDRIP</option>
