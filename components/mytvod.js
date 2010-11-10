@@ -108,6 +108,8 @@ $(document).ready(function () {
 			} else if ($(this).text() == 'Unsubscribe') {
 				$(this).text('Subscribe');
 				$(this).parent().attr('href', url.replace('&cancel=1',''));
+				//if ($('.episodedetails .subscribe').exists())
+					$(this).parent().attr('class', 'subscribedialog');
 			}
 			$(this).fadeIn('fast');
 		});
@@ -212,39 +214,46 @@ $(document).ready(function () {
 		}
 	});
 	$('.subscribedialog').live('click', function () {
+		var thissubscription = $(this);
 		$('#dialog').dialog('option','title','Subscribe');
 		$('#dialog').dialog('option','buttons', {
 			'Subscribe': function() {
 				var url = $(this).children('select#episode').children('option:selected').attr('id');
+				if (url == null)
+					url = $('.episodedetails h2 a:nth-child(2)').attr('href');
+				var language = $(this).children('select#language').children('option:selected').attr('id');
 				var quality = $(this).children('select#quality').children('option:selected').attr('id');
 				$.get(url.replace('episode.php?', 'subscribe.php?from=1&') + '&quality=' + quality, function (data) {
 					window.location = url;
 				});
 			},
-			'Next one': function () { 
-				var url = $(this).children('select#episode').children('option:selected').attr('id');
+			'Next one': function () {
+				var url = $('.episodedetails h2 a:nth-child(2)').attr('href');
 				var quality = $(this).children('select#quality').children('option:selected').attr('id');
 				var language = $(this).children('select#language').children('option:selected').attr('id');
+				var thisdialog = $(this);
+				if (url == null) url = thissubscription.attr('href');
 				$.get(url.replace('episode.php?', 'subscribe.php?') + '&quality=' + quality + '&language=' + language, function (data) {
-					$('.subscribedialog').html('<span>Unsubscribe</span>');
-					$('.subscribedialog').attr('href', url.replace('episode.php?', 'subscribe.php?') + '&cancel=1');
-					$('.subscribedialog').attr('class','subscribe');
-					$(this).dialog('close');
+					thissubscription.html('<span>Unsubscribe</span>');
+					thissubscription.attr('href', url.replace('episode.php?', 'subscribe.php?') + '&cancel=1');
+					thissubscription.attr('class','subscribe');
+					thisdialog.dialog('close');
 				});
 			},
 			'Cancel': function () { $(this).dialog('close'); }
 		});
 		$('#dialog').html('<p style="text-align: justify;">Which episode to start subscription?</p><select id="episode" style="width: 370px"></select><p style="text-align: justify;">Select quality:</p><select id="quality"><option id="0">HDTV</option><option id="1">DVDRIP</option><option id="2">720p</option></select><p style="text-align: justify;">Select subtitle language:</p><select id="language"><option id="none" selected="selected">None</option><option id="cz">Cesky</option><option id="dk">Dansk</option><option id="de">Deutsch</option><option id="en">English</option><option id="es">Espa&ntilde;ol</option><option id="fr">Fran&ccedil;ais</option><option id="hr">Hrvatski</option><option id="it">Italiano</option><option id="hu">Nagyar</option><option id="nl">Nederlands</option><option id="no">Norsk</option><option id="pl">Polski</option><option id="pt">Portugu&ecirc;s</option><option id="sk">Slovenski</option><option id="fi">Suomeksi</option><option id="sv">Svenska</option><option id="tr">T&uuml;rk&ccedil;e</option></select>');
+		$('button:nth-child(1)').hide();
 		$('.fullcontent').children().each(function() {
 			$(this).children().each(function () {
 				$(this).children('ul').each(function () {
 					$(this).children('li').each(function () {
 						episodeIcon = $(this).children('span').children('span').children('img').attr('src');
-						//if ((episodeIcon != 'images/future_episode.png') && (episodeIcon != 'images/unknown_airing.png')) {
 						if (episodeIcon == 'images/download.png') {
 							var seasoncontainer = $(this).children('a').attr('href');
 							var re = new RegExp('season=([0-9]*)\&');
 							season = re.exec(seasoncontainer)[1];
+							$('button:nth-child(1)').show();
 							$('#dialog select#episode').prepend('<option id="' + $(this).children('a').attr('href') + '">' + season + 'x' + $(this).children('a').text() + '</option>');
 						}
 					});
