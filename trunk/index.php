@@ -12,7 +12,7 @@
 					<div class="imagecontainer">
 						<a href="show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="cache/<?=$randomshows->getID()?>-poster.jpg" /></a>
 					</div>
-					<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
+					<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID(), 1)?>
 					<h2><a href="show.php?showid=<?=$randomshows->getID()?>"><?=$randomshows->getTitle()?></a></h2>
 					<div class="plot"><?=$randomshows->getPlot()?></div>
 					<?php } ?>
@@ -24,7 +24,7 @@
 							<a href="show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="cache/<?=$randomshows->getID()?>-fanart.jpg" /></a>
 						</div>
 						<div class="details">
-							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
+							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID(), 1)?>
 							<h3><a href="show.php?showid=<?=$randomshows->getID()?>"><?=htmlentities($randomshows->getTitle())?></a></h3>
 							<span><?=cutText($randomshows->getPlot(), 220)?></span>
 						</div>
@@ -37,7 +37,7 @@
 							<a href="show.php?showid=<?=$randomshows->getID()?>"><img class="thumbnail" alt="<?=$randomshows->getTitle()?>" src="cache/<?=$randomshows->getID()?>-fanart.jpg" /></a>
 						</div>
 						<div class="details">
-							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID())?>
+							<?=addSubscribeText($randomshows->isSubscribed(), $randomshows->getID(), 1)?>
 							<h3><a href="show.php?showid=<?=$randomshows->getID()?>"><?=$randomshows->getTitle()?></a></h3>
 							<span><?=cutText($randomshows->getPlot(), 220)?></span>
 						</div>
