@@ -1,5 +1,6 @@
 <?
-	include 'config.php';
+	$thisdirectory = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'));
+	include "$thisdirectory/config.php";
 	define('EP_NOT_PRESENT', 0);
 	define('EP_DOWNLOADING', 1);
 	define('EP_PENDING', 2);
@@ -21,7 +22,6 @@
 		die('Could not select database: ' . mysql_error());
 	updateShowsEZTV();
 	$serieslocation = getString('serieslocation');
-	$thisdirectory = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'));
 	unset($null);
 	
 	function showsEZTV() {

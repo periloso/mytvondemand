@@ -1,17 +1,18 @@
 #!/usr/bin/php
 <?php
-	include 'functions.php';
+	$thisdirectory = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'));
+	include "$thisdirectory/functions.php";
 
 	$subtitleDownloader = getString('subtitlescript');
 	$language = getString('subtitlelanguage');
 	$serieslocation = getString('serieslocation');
-	include "subtitles/".$subtitleDownloader.".php";
+	include "$thisdirectory/subtitles/$subtitleDownloader.php";
 	
-	$q = mysql_query("SELECT shows.title as showTitle, episodes.showid as showid, episodes.title as episodeTitle, episodes.season, episodes.id, subscriptions.subtitles as language FROM downloaded JOIN episodes ON downloaded.episodeid = episodes.id AND downloaded.season = episodes.season AND downloaded.showid = episodes.showid JOIN shows ON shows.id = downloaded.showid JOIN subscriptions ON downloaded.showid = subscriptions.showid WHERE subbed = 0");
+	$q = mysql_query("SELECT shows.title as showTitle, episodes.showid as showid, episodes.title as episodeTitle, episodes.season, episodes.id, subscriptions.subtitles as language FROM downloaded JOIN episodes ON downloaded.episodeid = episodes.id AND downloaded.season = episodes.season AND downloaded.showid = episodes.showid JOIN shows ON shows.id = downloaded.showid LEFT JOIN subscriptions ON downloaded.showid = subscriptions.showid WHERE subbed = 0");
 	
 	while($row = mysql_fetch_array($q, MYSQL_ASSOC)) {
 		//function fetchSubtitles($showtitle, $season, $episode, $language) {
-		if ($row['language'] != 'none')
+		if (($row['language'] != 'none') && ($row['language'] != null))
 			$sublanguage = $row['language'];
 		else
 			$sublanguage = $language;
