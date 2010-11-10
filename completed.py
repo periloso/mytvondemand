@@ -137,6 +137,7 @@ def processTorrent(torrentName, torrentDir, torrentHash):
 		if (config['debug']):
 			syslog.syslog("SQL: " + sql)
 		cursor.execute(sql)
+		os.system(myPath + '/subtitles.php')
 	else:
 		if (config['debug']):
 			syslog.syslog("Can't find the torrent hashString '" + torrentHash + "'. Follows the SQL\n" + sql)

@@ -399,7 +399,7 @@ $(document).ready(function () {
 
 function decodeStatus(s) {
 	if (s == 1) return 'Check wait';
-	else if (s == 2) return 'Checking';
+	else if (s == 2) return 'Checking local data';
 	else if (s == 4) return 'Downloading';
 	else if (s == 8) return 'Seeding';
 	else if (s == 16) return 'Stopped';
