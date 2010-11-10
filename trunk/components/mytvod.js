@@ -250,7 +250,16 @@ $(document).ready(function () {
 	if ($('.beingdownloaded .downloaddetails .imagecontainer .progressbar').exists()) {
 		window.setInterval(function () {
 			$('.beingdownloaded .downloaddetails').each(function () {
-				var link = $(this).children('h2').children('a:nth-child(2)').attr('href').replace('episode.php?','downloadstatus.php?');
+				var hash = $(this).children('h2').attr('id');
+				var h2 = $(this).children('h2');
+				if (!hash) {
+					var hashlink = h2.children('a:nth-child(2)').attr('href').replace('episode.php?','downloadstatus.php?') + '&getHash=1';
+					$.getJSON(hashlink, function(data) {
+						h2.attr('id', data['hash']);
+					});
+					return;
+				}
+				var link = $(this).children('h2').children('a:nth-child(2)').attr('href').replace('episode.php?','downloadstatus.php?') + '&hash=' + hash;
 				var progressepisode = $(this).children('.imagecontainer').children('.progressbar');
 				var episodedetails = $(this).children('.imagecontainer').children('.details');
 				var thisdownload = $(this);
