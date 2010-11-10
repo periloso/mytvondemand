@@ -30,17 +30,21 @@
 		preg_match_all("/\/show\/(.*)/", $series[strtolower($showtitle)], $matches);
 		$link = $matches[1][0];
 		$data = str_replace("\n","",file_get_contents("http://www.addic7ed.com/ajax_loadShow.php?show=$link&season=$season"));
-		preg_match_all("/ - [0-9]*x[0]*$episode.*?".$englang[$language].".*?(\/updated.*?)\".*?<\/table>/", $data, $matches);
-		$sublink = $matches[1][0];
+		preg_match_all("/ - [0-9]*x[0]*$episode.*?".$englang[$language].".*?>([0-9\.\% ]*)?Completed.*?(\/updated.*?)\".*?<\/table>/", $data, $matches);
+		$sublink = $matches[2][0];
+		$completed = $matches[1][0];
 		unset($link); unset($matches); unset($data);
 		
 		/* Subtitle download */
-		if ($sublink == Null)
+		if (($sublink == Null) || ($completed != ''))
 			return Null;
 		$subtitle = file_get_contents("http://www.addic7ed.com".$sublink);
-		if ($subtitle != Null)
-			return $subtitle;
-		else
-			return Null;
+		if (strrpos($subtitle, "Daily Download count exceeded") === false) {
+			if ($subtitle != Null)
+				return $subtitle;
+			else
+				return Null;
+		} else
+			return null;
 	}
 ?>
