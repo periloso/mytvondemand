@@ -25,7 +25,7 @@
 	
 	$download = mysql_query("SELECT downloaded.id as downloadid, episodes.*, shows.title as showtitle FROM episodes " .
 							"JOIN downloaded ON downloaded.episodeid = episodes.id AND downloaded.season = episodes.season AND downloaded.showid = episodes.showid " .
-							"JOIN shows ON episodes.showid = shows.id ORDER BY downloadid DESC");
+							"JOIN shows ON episodes.showid = shows.id ORDER BY downloadid DESC LIMIT 35");
 
 ?>
 			<div class="normalbox downloads downloadedtorrents"><h3>Episodes downloaded</h3><?php while ($singleepisode = mysql_fetch_array($download, MYSQL_ASSOC)) { ?>
