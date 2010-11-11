@@ -1,6 +1,6 @@
 <?php
 	include 'header.php';
-
+	
 	$show = mysql_query(	"SELECT *, subscriptions.quality FROM (SELECT shows.*, episodes.aired FROM shows as shows " .
 								"LEFT JOIN (SELECT showid, aired FROM episodes WHERE aired >= CURDATE()) as episodes " .
 								"ON shows.id = episodes.showid " .
@@ -21,6 +21,19 @@
 		} else
 			$airingtext = "No airs";
 		$q = $singleshow['quality'];
+		
+		$englang = array(	it => 'Italian',
+							en => 'English',
+							es => 'Spanish',
+							ro => 'Romanian',
+							pt => 'Portuguese',
+							fr => 'French',
+							hu => 'Hungarian',
+							ru => 'Russian',
+							de => 'German',
+							sw => 'Swedish',
+							dk => 'Dutch');
+		
 		if ($q == 0)
 			$quality = "HDTV";
 		elseif ($q == 1)
@@ -34,6 +47,7 @@
 						<a href="show.php?showid=<?=$singleshow['id']?>"><img class="thumbnail" alt="<?=utf8_decode($singleshow['title'])?>" src="cache/<?=$singleshow['id']?>-poster.jpg" /></a>
 						<div class="quality">Quality: <strong><?=$quality?></strong></div>
 						<div class="nextair">Next airing: <strong><?=$airingtext?></strong></div>
+						<div class="subtitles">Subtitles: <strong><?=$englang[$singleshow['subtitles']]?></strong></div>
 					</div>
 					<?=addSubscribeText(1, $singleshow['id'])?>
 					<h2><a href="show.php?showid=<?=$singleshow['id']?>"><?=utf8_decode($singleshow['title'])?></a></h2>

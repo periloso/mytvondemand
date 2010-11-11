@@ -398,7 +398,7 @@ $(document).ready(function () {
 });
 
 function decodeStatus(s) {
-	if (s == 1) return 'Check wait';
+	if (s == 1) return 'Queue to check data';
 	else if (s == 2) return 'Checking local data';
 	else if (s == 4) return 'Downloading';
 	else if (s == 8) return 'Seeding';
