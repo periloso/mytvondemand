@@ -9,6 +9,18 @@
 								"JOIN subscriptions ON subscriptions.showid = final.id " .
 								"GROUP BY id ORDER BY ISNULL(aired), aired, title");
 
+	$englang = array(	it => 'Italian',
+						en => 'English',
+						es => 'Spanish',
+						ro => 'Romanian',
+						pt => 'Portuguese',
+						fr => 'French',
+						hu => 'Hungarian',
+						ru => 'Russian',
+						de => 'German',
+						sw => 'Swedish',
+						dk => 'Dutch',
+						none => 'No subs');
 	while ($singleshow = mysql_fetch_array($show, MYSQL_ASSOC)) {
 		if ($singleshow['aired']>0) {
 			$difference = dateDifference($singleshow['aired']); # Difference to now (default value)
@@ -22,17 +34,10 @@
 			$airingtext = "No airs";
 		$q = $singleshow['quality'];
 		
-		$englang = array(	it => 'Italian',
-							en => 'English',
-							es => 'Spanish',
-							ro => 'Romanian',
-							pt => 'Portuguese',
-							fr => 'French',
-							hu => 'Hungarian',
-							ru => 'Russian',
-							de => 'German',
-							sw => 'Swedish',
-							dk => 'Dutch');
+		if ($singleshow['subtitles'] != null)
+			$subtitlelanguage = $englang[$singleshow['subtitles']];
+		else
+			$subtitlelanguage = $englang['none'];
 		
 		if ($q == 0)
 			$quality = "HDTV";
@@ -47,7 +52,7 @@
 						<a href="show.php?showid=<?=$singleshow['id']?>"><img class="thumbnail" alt="<?=utf8_decode($singleshow['title'])?>" src="cache/<?=$singleshow['id']?>-poster.jpg" /></a>
 						<div class="quality">Quality: <strong><?=$quality?></strong></div>
 						<div class="nextair">Next airing: <strong><?=$airingtext?></strong></div>
-						<div class="subtitles">Subtitles: <strong><?=$englang[$singleshow['subtitles']]?></strong></div>
+						<div class="subtitles">Subtitles: <strong><?=$subtitlelanguage?></strong></div>
 					</div>
 					<?=addSubscribeText(1, $singleshow['id'])?>
 					<h2><a href="show.php?showid=<?=$singleshow['id']?>"><?=utf8_decode($singleshow['title'])?></a></h2>
