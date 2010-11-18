@@ -23,8 +23,9 @@
 		$episodeid = $row['id'];
 		if ($sublanguage != 'none') {
 			$subtitle = fetchSubtitles($showTitle, $season, $episodeid, $sublanguage);
+			echo "$showTitle - $season"."x"."$episodeid - $episodeTitle\n";
 			if (($subtitle != Null) && (strlen($subtitle) >= 100)) {
-				$filePath = sprintf('%s/%s/%s - %02dx%02d - %s.srt', $serieslocation, $showTitle, $showTitle, $season, $episodeid, $episodeTitle);
+				$filePath = sprintf('%s/%s/%s - %02dx%02d - %s.srt', $serieslocation, sanitizeStrings($showTitle), sanitizeStrings($showTitle), $season, $episodeid, sanitizeStrings($episodeTitle));
 				file_put_contents($filePath, $subtitle);			
 				mysql_query("UPDATE downloaded SET subbed = 1 WHERE showid = '$showid' AND season = '$season' AND episodeid = '$episodeid'");
 			}
